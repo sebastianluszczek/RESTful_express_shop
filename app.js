@@ -14,7 +14,8 @@ mongoose.connect(
 );
 
 const productRoutes = require("./api/routes/products");
-const orderRoutes = require("./api/routes/order");
+const orderRoutes = require("./api/routes/orders");
+const userRoutes = require("./api/routes/users");
 
 app.use(morgan("dev"));
 app.use("/uploads", express.static("uploads"));
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
 
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/user", userRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not found...");

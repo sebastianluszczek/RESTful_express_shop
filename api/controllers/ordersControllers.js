@@ -1,11 +1,7 @@
-const express = require("express");
-const router = express.Router();
-const mongoose = require("mongoose");
-
 const Order = require("../models/Order");
 const Product = require("../models/Product");
 
-router.get("/", (req, res, next) => {
+exports.orders_get_all = (req, res, next) => {
   Order.find()
     .select("product quantity _id")
     .populate("product", "name price")
@@ -31,9 +27,9 @@ router.get("/", (req, res, next) => {
         error: err
       });
     });
-});
+};
 
-router.post("/", (req, res, next) => {
+exports.orders_post = (req, res, next) => {
   Product.findById(req.body.productId)
     .then(product => {
       if (!product) {
@@ -66,9 +62,9 @@ router.post("/", (req, res, next) => {
         error: err
       });
     });
-});
+};
 
-router.get("/:orderId", (req, res, next) => {
+exports.orders_get = (req, res, next) => {
   Order.findById(req.params.orderId)
     .select("product _id quantity")
     .populate("product", "name price")
@@ -92,9 +88,9 @@ router.get("/:orderId", (req, res, next) => {
         error: err
       });
     });
-});
+};
 
-router.delete("/:orderId", (req, res, next) => {
+exports.orders_delete = (req, res, next) => {
   Order.remove({
     _id: req.params.orderId
   })
@@ -114,6 +110,4 @@ router.delete("/:orderId", (req, res, next) => {
         error: err
       });
     });
-});
-
-module.exports = router;
+}

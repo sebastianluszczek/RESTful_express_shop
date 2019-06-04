@@ -29,6 +29,6 @@ Also here I will try add Swagger documentation <img src="https://upload.wikimedi
 npm install
 
 # start server at localhost:4000
-npm run start
+npm run dev
 ```
 
